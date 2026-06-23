@@ -1,4 +1,4 @@
-// import SignUpForm from "@/components/auth/signup-form";
+import SignUpForm from "@/components/ui/signup-form";
 
 import { GoTo } from "@/components/ui/goto";
 
@@ -20,7 +20,7 @@ export default function SingUp() {
           </dl>
         </aside>
       </section>
-      {/* <SignUpForm /> */}
+      <SignUpForm />
     </main>
   );
 }

@@ -1,5 +1,6 @@
-// import SignInForm from "@/components/auth/signin-form";
 import { GoTo } from "@/components/ui/goto";
+import SignInForm from "@/components/ui/signin-form";
+
 
 
 export default function SingUp() {
@@ -20,7 +21,7 @@ export default function SingUp() {
           </dl>
         </aside>
       </section>
-      {/* <SignInForm /> */}
+      <SignInForm />
     </main>
   );
 }

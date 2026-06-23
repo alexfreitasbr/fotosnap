@@ -5,9 +5,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+
 
 export default function SignUpForm() {
   return (
@@ -18,7 +16,8 @@ export default function SignUpForm() {
           Enter your email and password to create to your account
         </CardDescription>
         <CardContent>
-          <form>
+          ola
+          {/* <form>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -30,7 +29,7 @@ export default function SignUpForm() {
               </Field>
               <Button type="submit">Login</Button>
             </FieldGroup>
-          </form>
+          </form> */}
         </CardContent>
       </CardHeader>
     </Card>

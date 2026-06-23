@@ -1,19 +1,26 @@
 import { z } from "zod";
 
 
+
+const validatePassword = z
+.string()
+.min(8, "Password must be at least 8 characters")
+.regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+.regex(/[a-z]/, "Password must contain at least one lowercase letter")
+.regex(/[0-9]/, "Password must contain at least one number")
+.regex(
+  /[^A-Za-z0-9]/,
+  "Password must contain at least one special character"
+);
+
+
+
+
+// signup schema
 const signUpSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.email("Enter a valid email address").transform((email) => email.toLowerCase()),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    .regex(/[0-9]/, "Password must contain at least one number")
-    .regex(
-      /[^A-Za-z0-9]/,
-      "Password must contain at least one special character"
-    ),
+  password: validatePassword,
   confirmPassword: z.string(),
 })
 .refine((data) => data.password === data.confirmPassword, {
@@ -24,4 +31,16 @@ const signUpSchema = z.object({
 export { signUpSchema };
 
 export type SignUpValues = z.infer<typeof signUpSchema>;
+
+
+// signin schema
+const signInSchema = z.object({
+  email: z.email("Enter a valid email address").transform((email) => email.toLowerCase()),
+  password: validatePassword,
+})
+
+export { signInSchema };
+
+export type SignInValues = z.infer<typeof signInSchema>;
+
 

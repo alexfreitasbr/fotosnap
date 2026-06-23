@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,15 +18,14 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { signInSchema, SignInValues } from "@/lib/schema";
+import  {useState} from "react";
 
-const signInSchema = z.object({
-  email: z.string().email("Enter a valid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-});
+type SignInFormProps = {
+  onSubmit: (values: SignInValues) => void;
+}
 
-type SignInValues = z.infer<typeof signInSchema>;
-
-export default function SignInForm() {
+export default function SignInForm({ onSubmit }: SignInFormProps) {
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -36,8 +34,17 @@ export default function SignInForm() {
     },
   });
 
-  function onSubmit(values: SignInValues) {
-    console.log(values);
+  const [submiting, setSubmiting] = useState(false);
+
+  function handleSubmit(values: SignInValues) {
+    setSubmiting(true);
+      try {
+        onSubmit(values);
+      } catch (error) {
+        console.error("Error submitting signUp form", error);
+      } finally {
+        setSubmiting(false);
+      }
   }
 
   return (
@@ -51,8 +58,7 @@ export default function SignInForm() {
       <CardContent>
         <form
           id="signin-form"
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4"
+          onSubmit={form.handleSubmit(handleSubmit)}          className="space-y-4"
         >
           <FieldGroup>
             <Controller
@@ -93,8 +99,8 @@ export default function SignInForm() {
                 </Field>
               )}
             />
-            <Button type="submit" className="w-full">
-              Login
+            <Button type="submit" className="w-full" disabled={submiting}>
+            {submiting ? "Logging in..." : "Login"}
             </Button>
           </FieldGroup>
         </form>

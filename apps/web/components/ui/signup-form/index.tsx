@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,25 +18,37 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { signUpSchema, SignUpValues } from "@/lib/schema";
+import  {useState} from "react";
 
-const signUpSchema = z.object({
-  email: z.string().email("Enter a valid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-});
+type SignUpFormProps = {
+  onSubmit: (values: SignUpValues) => void;
+}
 
-type SignUpValues = z.infer<typeof signUpSchema>;
 
-export default function SignUpForm() {
+export default function SignUpForm({ onSubmit}: SignUpFormProps) {
   const form = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  function onSubmit(values: SignUpValues) {
-    console.log(values);
+  const [submiting, setSubmiting] = useState(false);
+
+
+  function handleSubmit(values: SignUpValues) {
+    setSubmiting(true);
+      try {
+        onSubmit(values);
+      } catch (error) {
+        console.error("Error submitting signUp form", error);
+      } finally {
+        setSubmiting(false);
+      }
   }
 
   return (
@@ -51,10 +62,29 @@ export default function SignUpForm() {
       <CardContent>
         <form
           id="signup-form"
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleSubmit)}
           className="space-y-4"
         >
           <FieldGroup>
+          <Controller
+              name="name"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="signup-name">Name</FieldLabel>
+                  <Input
+                    {...field}
+                    id="signup-name"
+                    type="text"
+                    placeholder="John Doe"
+                    aria-invalid={fieldState.invalid}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
             <Controller
               name="email"
               control={form.control}
@@ -93,8 +123,27 @@ export default function SignUpForm() {
                 </Field>
               )}
             />
-            <Button type="submit" className="w-full">
-              Sign up
+            <Controller
+              name="confirmPassword"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="signup-confirm-password">Confirm Password</FieldLabel>
+                  <Input
+                    {...field}
+                    id="signup-confirm-password"
+                    type="password"
+                    placeholder="••••••••"
+                    aria-invalid={fieldState.invalid}
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Button type="submit" className="w-full" disabled={submiting}>
+            {submiting ? "Signing up..." : "Sign up"}
             </Button>
           </FieldGroup>
         </form>

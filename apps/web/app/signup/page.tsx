@@ -1,8 +1,13 @@
+"use client";
 import SignUpForm from "@/components/ui/signup-form";
 
 import { GoTo } from "@/components/ui/goto";
+import { SignUpValues } from "@/lib/schema";
 
 export default function SingUp() {
+  function onSubmit(values: SignUpValues) {
+    console.log(values);
+  }
   return (
     <main className="min-h-screen flex flex-col  gap-8 items-center justify-center py-12 px-4 bg-background sm:px-6 lg:px-8">
       <section className="flex flex-col items-center justify-center gap-2">
@@ -20,7 +25,7 @@ export default function SingUp() {
           </dl>
         </aside>
       </section>
-      <SignUpForm />
+      <SignUpForm onSubmit={onSubmit} />
     </main>
   );
 }

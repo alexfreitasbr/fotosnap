@@ -1,5 +1,5 @@
 "use client";
-import SignUpForm from "@/components/ui/signup-form";
+import SignUpForm from "@/components/auth/signup-form";
 
 import { GoTo } from "@/components/ui/goto";
 import { SignUpValues } from "@/lib/schema";

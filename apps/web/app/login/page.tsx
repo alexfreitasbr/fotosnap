@@ -1,7 +1,7 @@
 "use client";
 
 import { GoTo } from "@/components/ui/goto";
-import SignInForm from "@/components/ui/signin-form";
+import SignInForm from "@/components/auth/signin-form";
 import { SignInValues } from "@/lib/schema";
 
 

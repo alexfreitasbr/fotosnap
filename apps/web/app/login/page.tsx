@@ -2,15 +2,31 @@
 
 import { GoTo } from "@/components/ui/goto";
 import SignInForm from "@/components/auth/signin-form";
+import { saveAuthSession, signIn } from "@/lib/auth-api";
 import { SignInValues } from "@/lib/schema";
 import { useLanguageStore } from "@/stores/language";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SingUp() {
-  function onSubmit(values: SignInValues) {
-    console.log(values);
-  }
-
   const { language } = useLanguageStore();
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState<string>();
+
+  async function onSubmit(values: SignInValues) {
+    setErrorMessage(undefined);
+
+    try {
+      const auth = await signIn(values);
+      saveAuthSession(auth);
+      router.push("/");
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unable to sign in",
+      );
+      throw error;
+    }
+  }
 
   return (
     <main className="min-h-screen flex flex-col  gap-8 items-center justify-center py-12 px-4 bg-background sm:px-6 lg:px-8">
@@ -29,7 +45,7 @@ export default function SingUp() {
           </dl>
         </aside>
       </section>
-      <SignInForm onSubmit={onSubmit} />
+      <SignInForm onSubmit={onSubmit} errorMessage={errorMessage} />
     </main>
   );
 }

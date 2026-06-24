@@ -2,15 +2,32 @@
 import SignUpForm from "@/components/auth/signup-form";
 
 import { GoTo } from "@/components/ui/goto";
+import { saveAuthSession, signUp } from "@/lib/auth-api";
 import { SignUpValues } from "@/lib/schema";
 import { useLanguageStore } from "@/stores/language";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 export default function SingUp() {
-
   const { language } = useLanguageStore();
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState<string>();
 
-  function onSubmit(values: SignUpValues) {
-    console.log(values);
+  async function onSubmit(values: SignUpValues) {
+    setErrorMessage(undefined);
+
+    try {
+      const auth = await signUp(values);
+      saveAuthSession(auth);
+      router.push("/");
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unable to create account",
+      );
+      throw error;
+    }
   }
+
   return (
     <main className="min-h-screen flex flex-col  gap-8 items-center justify-center py-12 px-4 bg-background sm:px-6 lg:px-8">
       <section className="flex flex-col items-center justify-center gap-2">
@@ -28,7 +45,7 @@ export default function SingUp() {
           </dl>
         </aside>
       </section>
-      <SignUpForm onSubmit={onSubmit} />
+      <SignUpForm onSubmit={onSubmit} errorMessage={errorMessage} />
     </main>
   );
 }

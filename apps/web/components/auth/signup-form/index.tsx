@@ -25,16 +25,23 @@ import { useLanguageStore } from "@/stores/language";
 import { useSignUpSchema } from "@/hooks/use-auth-schemas";
 
 type SignUpFormProps = {
-  onSubmit: (values: SignUpValues) => void;
+  onSubmit: (values: SignUpValues) => void | Promise<void>;
+  errorMessage?: string;
 }
 
-export default function SignUpForm({ onSubmit}: SignUpFormProps) {
+export default function SignUpForm({ onSubmit, errorMessage }: SignUpFormProps) {
   const locale = useLanguageStore((state) => state.locale);
 
-  return <SignUpFormFields key={locale} onSubmit={onSubmit} />;
+  return (
+    <SignUpFormFields
+      key={locale}
+      onSubmit={onSubmit}
+      errorMessage={errorMessage}
+    />
+  );
 }
 
-function SignUpFormFields({ onSubmit }: SignUpFormProps) {
+function SignUpFormFields({ onSubmit, errorMessage }: SignUpFormProps) {
   const signUpSchema = useSignUpSchema();
   const { language } = useLanguageStore();
 
@@ -50,15 +57,15 @@ function SignUpFormFields({ onSubmit }: SignUpFormProps) {
 
   const [submiting, setSubmiting] = useState(false);
 
-  function handleSubmit(values: SignUpValues) {
+  async function handleSubmit(values: SignUpValues) {
     setSubmiting(true);
-      try {
-        onSubmit(values);
-      } catch (error) {
-        console.error("Error submitting signUp form", error);
-      } finally {
-        setSubmiting(false);
-      }
+    try {
+      await onSubmit(values);
+    } catch (error) {
+      console.error("Error submitting signUp form", error);
+    } finally {
+      setSubmiting(false);
+    }
   }
 
   return (
@@ -155,6 +162,11 @@ function SignUpFormFields({ onSubmit }: SignUpFormProps) {
             <Button type="submit" className="w-full" disabled={submiting}>
             {submiting ? <Loading text={language.signup.submittingButton} />: language.signup.signupButton}
             </Button>
+            {errorMessage ? (
+              <p className="text-sm text-destructive" role="alert">
+                {errorMessage}
+              </p>
+            ) : null}
           </FieldGroup>
         </form>
       </CardContent>

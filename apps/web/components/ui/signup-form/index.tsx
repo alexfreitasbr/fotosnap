@@ -2,8 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-
+import { Loading} from "@/components/ui/loading";
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -143,7 +144,7 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
               )}
             />
             <Button type="submit" className="w-full" disabled={submiting}>
-            {submiting ? "Signing up..." : "Sign up"}
+            {submiting ? <Loading text="Signing up" />: "Sign up"}
             </Button>
           </FieldGroup>
         </form>

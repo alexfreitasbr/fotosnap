@@ -1,0 +1,42 @@
+export const pt = {
+  language: "Português",
+  home: {
+    title: "Inicio",
+    description: "Bem-vindo à página inicial",
+  },
+  login: {
+    header: "Entre com sua conta",
+    doNothave: `Você não tem uma conta?`,
+    loginButton: "Acessar",
+    submittingButton: "Acessando",
+    description: "Entre com seu email e senha para acessar sua conta",
+  },
+  signup: {
+    header: "Criar uma conta",
+    areadyHave: "Já tem uma conta?",
+    signupButton: "Criar uma conta",
+    submittingButton: "Criando uma conta",
+    description: "Entre com seu email e senha para criar sua conta",
+  },
+  common: {
+    name: "Nome",
+    email: "Email",
+    password: "Senha",
+    confirmPassword: "Confirmar Senha",
+    placeholderEmail: "Digite seu email",
+    placeholderPassword: "••••••••",
+    placeholderName: "Digite seu nome",
+  },
+  errors: {
+    email: "Por favor, digite um email válido",
+    password: "Por favor, digite uma senha",
+    confirmPassword: "As senhas não coincidem",
+    name: "Por favor, digite um nome",
+    emailRequired: "Por favor, digite um email",
+    passwordRequired: "Por favor, digite uma senha",
+    confirmPasswordRequired: "Por favor, confirme a senha",
+    nameRequired: "Por favor, digite um nome",
+    emailInvalid: "Por favor, digite um email válido",
+    passwordMinLength: "A senha deve ter pelo menos 8 caracteres",
+  },
+}

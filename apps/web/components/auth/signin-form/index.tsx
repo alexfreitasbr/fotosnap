@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { signInSchema, SignInValues } from "@/lib/schema";
 import  {useState} from "react";
+import { useLanguageStore } from "@/stores/language";
 
 type SignInFormProps = {
   onSubmit: (values: SignInValues) => void;
@@ -34,6 +35,8 @@ export default function SignInForm({ onSubmit }: SignInFormProps) {
       password: "",
     },
   });
+
+  const { language } = useLanguageStore();
 
   const [submiting, setSubmiting] = useState(false);
 
@@ -51,15 +54,16 @@ export default function SignInForm({ onSubmit }: SignInFormProps) {
   return (
     <Card className="mx-auto w-full max-w-md">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle>{language.login.header}</CardTitle>
         <CardDescription>
-          Enter your email and password to login to your account
+        {language.login.description}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form
           id="signin-form"
-          onSubmit={form.handleSubmit(handleSubmit)}          className="space-y-4"
+          onSubmit={form.handleSubmit(handleSubmit)}   
+          className="space-y-4"
         >
           <FieldGroup>
             <Controller
@@ -67,12 +71,12 @@ export default function SignInForm({ onSubmit }: SignInFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="signin-email">Email</FieldLabel>
+                  <FieldLabel htmlFor="signin-email">{language.common.email}</FieldLabel>
                   <Input
                     {...field}
                     id="signin-email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder={language.common.placeholderEmail}
                     aria-invalid={fieldState.invalid}
                   />
                   {fieldState.invalid && (
@@ -86,12 +90,12 @@ export default function SignInForm({ onSubmit }: SignInFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="signin-password">Password</FieldLabel>
+                  <FieldLabel htmlFor="signin-password">{language.common.password}</FieldLabel>
                   <Input
                     {...field}
                     id="signin-password"
                     type="password"
-                    placeholder="••••••••"
+                    placeholder={language.common.placeholderPassword}
                     aria-invalid={fieldState.invalid}
                   />
                   {fieldState.invalid && (
@@ -101,7 +105,7 @@ export default function SignInForm({ onSubmit }: SignInFormProps) {
               )}
             />
             <Button type="submit" className="w-full" disabled={submiting}>
-            {submiting ? <Loading text="Logging in" />: "Login"}
+            {submiting ? <Loading text={language.login.submittingButton} />: language.login.loginButton}
             </Button>
           </FieldGroup>
         </form>

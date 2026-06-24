@@ -1,0 +1,42 @@
+export const en = {
+  language: "English",
+  home: {
+    title: "Home",
+    description: "Welcome to the home page",
+  },
+  login: {
+    header: "Login to your account",
+    doNothave: `Don't you have an account?`,
+    loginButton: "Login",
+    submittingButton: "Logging in",
+    description: "Enter your email and password to login to your account",
+  },
+  signup: {
+    header: "Create an account",
+    areadyHave: "Aready have an account?",
+    signupButton: "Sign up",
+    submittingButton: "Signing up",
+    description: "Enter your email and password to create your account",
+  },
+  common: {
+    name: "Name",
+    email: "Email",
+    password: "Password",
+    confirmPassword: "Confirm Password",
+    placeholderEmail: "Enter your email",
+    placeholderPassword: "••••••••",
+    placeholderName: "Enter your name",
+  },
+  errors: {
+    email: "Please enter a valid email",
+    password: "Please enter a password",
+    confirmPassword: "The passwords do not match",
+    name: "Please enter a name",
+    emailRequired: "Please enter an email",
+    passwordRequired: "Please enter a password",
+    confirmPasswordRequired: "Please confirm the password",
+    nameRequired: "Please enter a name",
+    emailInvalid: "Please enter a valid email",
+    passwordMinLength: "Password must be at least 8 characters",
+  },
+}

@@ -3,8 +3,11 @@ import SignUpForm from "@/components/auth/signup-form";
 
 import { GoTo } from "@/components/ui/goto";
 import { SignUpValues } from "@/lib/schema";
-
+import { useLanguageStore } from "@/stores/language";
 export default function SingUp() {
+
+  const { language } = useLanguageStore();
+
   function onSubmit(values: SignUpValues) {
     console.log(values);
   }
@@ -13,14 +16,14 @@ export default function SingUp() {
       <section className="flex flex-col items-center justify-center gap-2">
         <header>
           <h2 className="mt-6 text-3xl font-extrabold text-foreground">
-            Create an account
+            {language.signup.header}
           </h2>
         </header>
         <aside className="flex flex-col items-center justify-center gap-2 ">
           <dl className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <dt>Aready have an account?</dt>
+            <dt>{language.signup.areadyHave}</dt>
             <GoTo href="/login">
-              <dd>Login</dd>
+              <dd>{language.login.loginButton}</dd>
             </GoTo>
           </dl>
         </aside>

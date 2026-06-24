@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { signUpSchema, SignUpValues } from "@/lib/schema";
 import  {useState} from "react";
+import { useLanguageStore } from "@/stores/language";
 
 type SignUpFormProps = {
   onSubmit: (values: SignUpValues) => void;
@@ -39,6 +40,7 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
   });
 
   const [submiting, setSubmiting] = useState(false);
+  const { language } = useLanguageStore();
 
 
   function handleSubmit(values: SignUpValues) {
@@ -55,9 +57,9 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
   return (
     <Card className="mx-auto w-full max-w-md">
       <CardHeader>
-        <CardTitle>Create your account</CardTitle>
+        <CardTitle>{language.signup.header}</CardTitle>
         <CardDescription>
-          Enter your email and password to create your account
+          {language.signup.description}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -72,12 +74,12 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="signup-name">Name</FieldLabel>
+                  <FieldLabel htmlFor="signup-name">{language.common.name}</FieldLabel>
                   <Input
                     {...field}
                     id="signup-name"
                     type="text"
-                    placeholder="John Doe"
+                    placeholder={language.common.placeholderName}
                     aria-invalid={fieldState.invalid}
                   />
                   {fieldState.invalid && (
@@ -91,12 +93,12 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="signup-email">Email</FieldLabel>
+                  <FieldLabel htmlFor="signup-email">{language.common.email}</FieldLabel>
                   <Input
                     {...field}
                     id="signup-email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder={language.common.placeholderEmail}
                     aria-invalid={fieldState.invalid}
                   />
                   {fieldState.invalid && (
@@ -110,12 +112,12 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="signup-password">Password</FieldLabel>
+                  <FieldLabel htmlFor="signup-password">{language.common.password}</FieldLabel>
                   <Input
                     {...field}
                     id="signup-password"
                     type="password"
-                    placeholder="••••••••"
+                    placeholder={language.common.placeholderPassword}
                     aria-invalid={fieldState.invalid}
                   />
                   {fieldState.invalid && (
@@ -129,12 +131,12 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="signup-confirm-password">Confirm Password</FieldLabel>
+                  <FieldLabel htmlFor="signup-confirm-password">{language.common.confirmPassword}</FieldLabel>
                   <Input
                     {...field}
                     id="signup-confirm-password"
                     type="password"
-                    placeholder="••••••••"
+                    placeholder={language.common.placeholderPassword}
                     aria-invalid={fieldState.invalid}
                   />
                   {fieldState.invalid && (
@@ -144,7 +146,7 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
               )}
             />
             <Button type="submit" className="w-full" disabled={submiting}>
-            {submiting ? <Loading text="Signing up" />: "Sign up"}
+            {submiting ? <Loading text={language.signup.submittingButton} />: language.signup.signupButton}
             </Button>
           </FieldGroup>
         </form>

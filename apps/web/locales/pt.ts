@@ -38,5 +38,10 @@ export const pt = {
     nameRequired: "Por favor, digite um nome",
     emailInvalid: "Por favor, digite um email válido",
     passwordMinLength: "A senha deve ter pelo menos 8 caracteres",
+    nameMinLength: "O nome deve ter pelo menos 2 caracteres",
+    passwordUppercase: "A senha deve conter pelo menos uma letra maiúscula",
+    passwordLowercase: "A senha deve conter pelo menos uma letra minúscula",
+    passwordNumber: "A senha deve conter pelo menos um número",
+    passwordSpecial: "A senha deve conter pelo menos um caractere especial",
   },
 }

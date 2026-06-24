@@ -19,16 +19,25 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { signUpSchema, SignUpValues } from "@/lib/schema";
-import  {useState} from "react";
+import { SignUpValues } from "@/lib/schema";
+import { useState } from "react";
 import { useLanguageStore } from "@/stores/language";
+import { useSignUpSchema } from "@/hooks/use-auth-schemas";
 
 type SignUpFormProps = {
   onSubmit: (values: SignUpValues) => void;
 }
 
-
 export default function SignUpForm({ onSubmit}: SignUpFormProps) {
+  const locale = useLanguageStore((state) => state.locale);
+
+  return <SignUpFormFields key={locale} onSubmit={onSubmit} />;
+}
+
+function SignUpFormFields({ onSubmit }: SignUpFormProps) {
+  const signUpSchema = useSignUpSchema();
+  const { language } = useLanguageStore();
+
   const form = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -40,8 +49,6 @@ export default function SignUpForm({ onSubmit}: SignUpFormProps) {
   });
 
   const [submiting, setSubmiting] = useState(false);
-  const { language } = useLanguageStore();
-
 
   function handleSubmit(values: SignUpValues) {
     setSubmiting(true);

@@ -38,5 +38,10 @@ export const en = {
     nameRequired: "Please enter a name",
     emailInvalid: "Please enter a valid email",
     passwordMinLength: "Password must be at least 8 characters",
+    nameMinLength: "Name must be at least 2 characters",
+    passwordUppercase: "Password must contain at least one uppercase letter",
+    passwordLowercase: "Password must contain at least one lowercase letter",
+    passwordNumber: "Password must contain at least one number",
+    passwordSpecial: "Password must contain at least one special character",
   },
 }

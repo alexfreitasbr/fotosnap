@@ -1,46 +1,42 @@
 import { z } from "zod";
+import type { pt } from "@/locales/pt";
 
+type ValidationMessages = typeof pt.errors;
 
+function createPasswordSchema(errors: ValidationMessages) {
+  return z
+    .string()
+    .min(8, errors.passwordMinLength)
+    .regex(/[A-Z]/, errors.passwordUppercase)
+    .regex(/[a-z]/, errors.passwordLowercase)
+    .regex(/[0-9]/, errors.passwordNumber)
+    .regex(/[^A-Za-z0-9]/, errors.passwordSpecial);
+}
 
-const validatePassword = z
-.string()
-.min(8, "Password must be at least 8 characters")
-.regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-.regex(/[a-z]/, "Password must contain at least one lowercase letter")
-.regex(/[0-9]/, "Password must contain at least one number")
-.regex(
-  /[^A-Za-z0-9]/,
-  "Password must contain at least one special character"
-);
+export function createSignUpSchema(errors: ValidationMessages) {
+  return z
+    .object({
+      name: z.string().min(2, errors.nameMinLength),
+      email: z
+        .email(errors.emailInvalid)
+        .transform((email) => email.toLowerCase()),
+      password: createPasswordSchema(errors),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: errors.confirmPassword,
+      path: ["confirmPassword"],
+    });
+}
 
+export function createSignInSchema(errors: ValidationMessages) {
+  return z.object({
+    email: z
+      .email(errors.emailInvalid)
+      .transform((email) => email.toLowerCase()),
+    password: createPasswordSchema(errors),
+  });
+}
 
-
-
-// signup schema
-const signUpSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.email("Enter a valid email address").transform((email) => email.toLowerCase()),
-  password: validatePassword,
-  confirmPassword: z.string(),
-})
-.refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
-
-export { signUpSchema };
-
-export type SignUpValues = z.infer<typeof signUpSchema>;
-
-
-// signin schema
-const signInSchema = z.object({
-  email: z.email("Enter a valid email address").transform((email) => email.toLowerCase()),
-  password: validatePassword,
-})
-
-export { signInSchema };
-
-export type SignInValues = z.infer<typeof signInSchema>;
-
-
+export type SignUpValues = z.infer<ReturnType<typeof createSignUpSchema>>;
+export type SignInValues = z.infer<ReturnType<typeof createSignInSchema>>;

@@ -147,6 +147,121 @@ pnpm exec turbo link
 pnpm exec turbo link
 ```
 
+## Testes
+
+O monorepo usa ferramentas diferentes por camada. Cada uma fica no pacote certo — não é necessário instalar RTL ou Playwright no backend.
+
+### Estrutura
+
+| Camada | Pacote | Ferramenta | O que testa |
+|--------|--------|------------|-------------|
+| **Front** | `apps/web` | Vitest + React Testing Library | Componentes, hooks e lógica de UI |
+| **Back** | `apps/backend` | Jest + Supertest | Services, controllers e rotas HTTP |
+| **E2E** | `apps/e2e` | Playwright | Fluxos completos no browser (login, signup, navegação) |
+
+### Onde ficam os arquivos
+
+```
+apps/web/components/**/*.test.tsx   # testes de componente (RTL)
+apps/backend/src/**/*.spec.ts     # testes unitários (Jest)
+apps/backend/test/**/*.e2e-spec.ts # e2e de API (Jest + Supertest)
+apps/e2e/tests/**/*.spec.ts       # testes e2e no browser (Playwright)
+```
+
+### Comandos na raiz
+
+```sh
+# Todos os testes (web + backend + e2e)
+pnpm test
+
+# Apenas um pacote
+pnpm test:web
+pnpm test:e2e
+
+# Cobertura (web com Vitest + backend com Jest)
+pnpm test:cov
+```
+
+### Front (`apps/web`)
+
+```sh
+# Rodar uma vez
+pnpm --filter web test
+
+# Modo watch (reexecuta ao salvar)
+pnpm --filter web test:watch
+
+# Cobertura de código
+pnpm --filter web test:cov
+```
+
+A cobertura é gerada em `apps/web/coverage/`. Para ver o relatório HTML:
+
+```sh
+open apps/web/coverage/index.html
+```
+
+A pasta `coverage/` está no `.gitignore` e não vai para o Git.
+
+### Back (`apps/backend`)
+
+```sh
+# Testes unitários
+pnpm --filter backend test
+
+# Modo watch
+pnpm --filter backend test:watch
+
+# e2e de API (Supertest)
+pnpm --filter backend test:e2e
+
+# Cobertura
+pnpm --filter backend test:cov
+```
+
+A cobertura do backend é gerada em `apps/backend/coverage/`.
+
+### E2E (`apps/e2e`)
+
+O Playwright sobe o Next.js automaticamente (`http://localhost:3000`) antes de rodar os testes.
+
+```sh
+# Headless (padrão)
+pnpm --filter e2e test
+
+# Interface visual do Playwright
+pnpm --filter e2e test:ui
+
+# Com o browser visível
+pnpm --filter e2e test:headed
+
+# Abrir o último relatório HTML
+pnpm --filter e2e test:report
+```
+
+**Primeira execução:** se aparecer erro de browser não encontrado, instale o Chromium:
+
+```sh
+pnpm --filter e2e exec playwright install chromium
+```
+
+O pacote `e2e` também roda esse install no `postinstall` após um `pnpm install`.
+
+### Fluxo recomendado
+
+1. **RTL (web)** — componentes isolados, rápidos (forms, validação, mensagens de erro).
+2. **Jest (backend)** — regras de negócio, auth, Prisma, DTOs.
+3. **Playwright (e2e)** — fluxos reais no browser com front e API rodando.
+
+### Desenvolvimento
+
+Para testar fluxos e2e que dependem da API, suba o backend em outro terminal antes ou em paralelo:
+
+```sh
+pnpm dev:backend   # API
+pnpm dev:web       # front (o Playwright já sobe isso nos testes e2e)
+```
+
 ## Useful Links
 
 Learn more about the power of Turborepo:

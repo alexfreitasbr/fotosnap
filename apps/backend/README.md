@@ -96,3 +96,32 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+
+
+-----------------
+
+Scripts disponíveis
+Comando	O que faz
+pnpm test
+Roda todos os testes (web + backend + e2e)
+pnpm test:web
+Só Vitest/RTL
+pnpm test:e2e
+Só Playwright
+pnpm --filter web test:watch
+Vitest em modo watch
+pnpm --filter e2e test:ui
+Playwright UI mode
+Resultado dos testes
+Web (RTL): 3 passed
+Backend (Jest): 1 passed
+E2E (Playwright): 3 passed
+Primeira vez no seu Mac
+Se o e2e falhar com “Executable doesn't exist”, rode uma vez:
+
+pnpm --filter e2e exec playwright install chromium
+O postinstall do pacote e2e cuida disso automaticamente depois de um pnpm install.
+
+Quer que eu faça o commit dessas mudanças?

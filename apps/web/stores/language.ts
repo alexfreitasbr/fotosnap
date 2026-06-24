@@ -1,7 +1,7 @@
-import { en, pt } from "../locales";
+import { en, pt, de, es, fr, it } from "../locales";
 import { create } from "zustand";
 
-type Locale = "pt" | "en";
+type Locale = "pt" | "en" | "de" | "es" | "fr" | "it";
 
 type LanguageState = {
   locale: Locale;
@@ -25,6 +25,14 @@ export function getLanguage(locale: Locale) {
       return pt;
     case "en":
       return en;
+    case "de":
+      return de;
+    case "es":
+      return es;
+    case "fr":
+      return fr;
+    case "it":
+      return it;
     default:
       return pt;
   }

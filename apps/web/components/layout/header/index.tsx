@@ -7,7 +7,7 @@ import Link from "next/link";
 export function Header() {
   const { language } = useLanguageStore();
   return (
-    <header className="flex items-center justify-between p-4">
+    <header className="flex items-center justify-between p-4 relative border-b border-border">
       <nav>
         <ul>
           <li>

@@ -3,7 +3,11 @@ packages:
   - "packages/*"
 allowBuilds:
   '@prisma/engines': true
-  bcrypt: set this to true or false
+  bcrypt: true
+  esbuild: true
   prisma: true
   sharp: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - playwright-core@1.61.1
+  - playwright@1.61.1

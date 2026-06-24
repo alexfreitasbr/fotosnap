@@ -12,7 +12,9 @@
     "test": "turbo run test",
     "test:web": "turbo run test --filter=web",
     "test:e2e": "turbo run test --filter=e2e",
-    "test:cov": "turbo run test:cov"
+    "test:cov": "turbo run test:cov",
+    "storybook": "turbo run storybook --filter=web",
+    "build-storybook": "turbo run build-storybook --filter=web"
   },
   "devDependencies": {
     "prettier": "^3.8.4",

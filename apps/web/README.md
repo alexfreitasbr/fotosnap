@@ -18,6 +18,26 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Storybook
+
+Para visualizar e documentar componentes isoladamente:
+
+```bash
+# na raiz do monorepo
+pnpm storybook
+
+# ou dentro desta pasta (apps/web)
+pnpm storybook
+```
+
+Abra [http://localhost:6006](http://localhost:6006). Para gerar o build estático:
+
+```bash
+pnpm build-storybook
+```
+
+As stories ficam em `components/**/*.stories.tsx`. A configuração está em `.storybook/`.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More

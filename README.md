@@ -262,6 +262,57 @@ pnpm dev:backend   # API
 pnpm dev:web       # front (o Playwright já sobe isso nos testes e2e)
 ```
 
+## Storybook
+
+O app `web` usa [Storybook](https://storybook.js.org/) 10 com o framework `@storybook/nextjs-vite`, integrado ao Next.js, Tailwind e aos estilos globais do projeto.
+
+### Onde ficam as stories
+
+```
+apps/web/components/**/*.stories.@(ts|tsx)   # componentes do projeto
+apps/web/stories/**/*.stories.@(ts|tsx)     # exemplos gerados na instalação
+apps/web/.storybook/                         # configuração (main.ts, preview.tsx)
+```
+
+### Comandos
+
+**Na raiz do monorepo** (`fotosnap/`):
+
+```sh
+pnpm storybook              # recomendado
+pnpm --filter web storybook # equivalente, sem passar pelo turbo
+```
+
+**Dentro de `apps/web`**:
+
+```sh
+pnpm storybook              # use este — sem --filter
+```
+
+> O `--filter web` só funciona quando você está na **raiz** do monorepo. Dentro de `apps/web`, use apenas `pnpm storybook`.
+
+Build estático:
+
+```sh
+# na raiz
+pnpm build-storybook
+
+# em apps/web
+pnpm build-storybook
+```
+
+Abra [http://localhost:6006](http://localhost:6006) no browser para visualizar e documentar os componentes.
+
+### Addons configurados
+
+- **Docs** — documentação automática das stories
+- **A11y** — verificação de acessibilidade
+- **Vitest** — integração com os testes do projeto
+- **Chromatic** — publicação visual (opcional)
+- **MCP** — integração com ferramentas de IA
+
+A pasta `storybook-static/` e os arquivos `*storybook.log` estão no `.gitignore` e não vão para o Git.
+
 ## Useful Links
 
 Learn more about the power of Turborepo:

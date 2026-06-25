@@ -1,13 +1,20 @@
 export const es = {
   language: "Español",
   home: {
-    title: "Inicio",
-    description: "Bienvenido a la página de inicio",
+    welcome: "Bienvenido a la página de inicio",
   },
+
+  navigation: {
+    home: "Inicio",
+    about: "Sobre",
+    contact: "Contacto",
+    login: "Iniciar sesión",
+    logout: "Cerrar sesión",
+  },
+
   login: {
     header: "Inicia sesión en tu cuenta",
     doNothave: `¿No tienes una cuenta?`,
-    loginButton: "Iniciar sesión",
     submittingButton: "Iniciando sesión…",
     description: "Introduce tu correo electrónico y contraseña para acceder a tu cuenta",
   },
@@ -19,6 +26,8 @@ export const es = {
     description: "Introduce tu correo electrónico y contraseña para crear tu cuenta",
   },
   common: {
+    title: "Collors & shapes",
+    description: "Rede social de apoio para personas con arte en el sangre",
     name: "Nombre",
     email: "Correo electrónico",
     password: "Contraseña",

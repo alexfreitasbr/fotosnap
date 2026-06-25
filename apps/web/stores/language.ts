@@ -1,7 +1,7 @@
-import { en, pt, de, es, fr, it } from "../locales";
+import { en, pt, de, es, fr, it } from "../core/locales";
 import { create } from "zustand";
 
-type Locale = "pt" | "en" | "de" | "es" | "fr" | "it";
+export type Locale = "pt" | "en" | "de" | "es" | "fr" | "it";
 
 type LanguageState = {
   locale: Locale;

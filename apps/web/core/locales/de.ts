@@ -1,9 +1,17 @@
 export const de = {
   language: "Deutsch",
   home: {
-    title: "Startseite",
-    description: "Willkommen auf der Startseite",
+    welcome: "Willkommen auf der Startseite",
   },
+
+  navigation: {
+    home: "Startseite",
+    about: "Über uns",
+    contact: "Kontakt",
+    login: "Anmelden",
+    logout: "Abmelden",
+  },
+
   login: {
     header: "Bei deinem Konto anmelden",
     doNothave: `Noch kein Konto?`,
@@ -19,6 +27,8 @@ export const de = {
     description: "Gib deine E-Mail-Adresse und dein Passwort ein, um dein Konto zu erstellen",
   },
   common: {
+    title: "Collors & shapes",
+    description: "Soziales Netzwerk für Menschen mit Kunst im Blut",
     name: "Name",
     email: "E-Mail",
     password: "Passwort",

@@ -120,7 +120,7 @@ function SignInFormFields({ onSubmit, errorMessage }: SignInFormProps) {
               )}
             />
             <Button type="submit" className="w-full" disabled={submiting}>
-            {submiting ? <Loading text={language.login.submittingButton} />: language.login.loginButton}
+            {submiting ? <Loading text={language.login.submittingButton} />: language.navigation.login}
             </Button>
             {errorMessage ? (
               <p className="text-sm text-destructive" role="alert">

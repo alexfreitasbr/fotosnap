@@ -1,13 +1,20 @@
 export const it = {
   language: "Italiano",
   home: {
-    title: "Home",
-    description: "Benvenuto nella home page",
+    welcome: "Benvenuto nella home page",
   },
+
+  navigation: {
+    home: "Home",
+    about: "Chi siamo",
+    contact: "Contatti",
+    login: "Accedi",
+    logout: "Esci",
+  },
+
   login: {
     header: "Accedi al tuo account",
     doNothave: `Non hai un account?`,
-    loginButton: "Accedi",
     submittingButton: "Accesso in corso…",
     description: "Inserisci la tua email e password per accedere al tuo account",
   },
@@ -19,6 +26,8 @@ export const it = {
     description: "Inserisci la tua email e password per creare il tuo account",
   },
   common: {
+    title: "Collors & shapes",
+    description: "Rede social de apoio para persone con arte nel sangue",
     name: "Nome",
     email: "Email",
     password: "Password",

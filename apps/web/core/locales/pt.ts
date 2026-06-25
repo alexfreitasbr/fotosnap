@@ -1,13 +1,20 @@
 export const pt = {
   language: "Português",
   home: {
-    title: "Inicio",
-    description: "Bem-vindo à página inicial",
+    welcome: "Bem-vindo à página inicial", 
   },
+
+  navigation: {
+    home: "Inicio",
+    about: "Sobre",
+    contact: "Contato",
+    login: "Acessar",
+    logout: "Sair",
+  },
+
   login: {
     header: "Entre com sua conta",
     doNothave: `Você não tem uma conta?`,
-    loginButton: "Acessar",
     submittingButton: "Acessando",
     description: "Entre com seu email e senha para acessar sua conta",
   },
@@ -19,6 +26,8 @@ export const pt = {
     description: "Entre com seu email e senha para criar sua conta",
   },
   common: {
+    title: "Collors & shapes",
+    description: "Rede social de apoio para pessoas com arte no sangue",
     name: "Nome",
     email: "Email",
     password: "Senha",

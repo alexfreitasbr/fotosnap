@@ -1,20 +1,10 @@
-"use client";
-
-import { LanguageSwitcher } from "@/components/ui/languageSwitch";
-import { useLanguageStore } from "@/stores/language";
-import Link from "next/link";
+import { LanguageSwitcher } from "@/components/layout/languageSwitch";
+import { NavBar } from "../nav-bar";
 
 export function Header() {
-  const { language } = useLanguageStore();
   return (
-    <header className="flex items-center justify-between p-4 relative border-b border-border">
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">{language.home.title}</Link>
-          </li>
-        </ul>
-      </nav>
+    <header className="flex items-center justify-between p-4 relative border-b border-border" test-id="header">
+      <NavBar />
       <LanguageSwitcher />
     </header>
   );

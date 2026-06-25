@@ -80,6 +80,35 @@ export function signIn(data: SignInValues): Promise<AuthResponse> {
   });
 }
 
+const AUTH_CHANGE_EVENT = "auth-change";
+
+/**
+ * Notifies listeners that the auth session changed.
+ */
+function notifyAuthChange(): void {
+  window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
+}
+
+/**
+ * Returns the stored auth session user, if any.
+ *
+ * @returns Authenticated user or null when there is no valid session.
+ */
+export function getAuthSession(): AuthUser | null {
+  const token = localStorage.getItem("accessToken");
+  const storedUser = localStorage.getItem("user");
+
+  if (!token || !storedUser) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(storedUser) as AuthUser;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Persists the auth session in local storage.
  *
@@ -88,4 +117,16 @@ export function signIn(data: SignInValues): Promise<AuthResponse> {
 export function saveAuthSession(auth: AuthResponse): void {
   localStorage.setItem("accessToken", auth.accessToken);
   localStorage.setItem("user", JSON.stringify(auth.user));
+  notifyAuthChange();
 }
+
+/**
+ * Removes the auth session from local storage.
+ */
+export function clearAuthSession(): void {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("user");
+  notifyAuthChange();
+}
+
+export { AUTH_CHANGE_EVENT };

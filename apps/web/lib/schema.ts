@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { pt } from "@/locales/pt";
+import type { pt } from "@/core/locales/pt";
 
 type ValidationMessages = typeof pt.errors;
 

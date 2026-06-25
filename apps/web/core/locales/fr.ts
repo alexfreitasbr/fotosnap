@@ -1,13 +1,20 @@
 export const fr = {
   language: "Français",
   home: {
-    title: "Accueil",
-    description: "Bienvenue sur la page d'accueil",
+    welcome: "Bienvenue sur la page d'accueil",
   },
+
+  navigation: {
+    home: "Accueil",
+    about: "À propos",
+    contact: "Contact",
+    login: "Se connecter",
+    logout: "Se déconnecter",
+  },
+
   login: {
     header: "Connectez-vous à votre compte",
     doNothave: `Vous n'avez pas de compte ?`,
-    loginButton: "Se connecter",
     submittingButton: "Connexion en cours…",
     description: "Saisissez votre adresse e-mail et votre mot de passe pour vous connecter",
   },
@@ -19,6 +26,8 @@ export const fr = {
     description: "Saisissez votre adresse e-mail et votre mot de passe pour créer votre compte",
   },
   common: {
+    title: "Collors & shapes",
+    description: "Rede social de apoio pour les personnes avec art dans le sang",
     name: "Nom",
     email: "Adresse e-mail",
     password: "Mot de passe",

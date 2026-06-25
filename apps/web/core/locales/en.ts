@@ -1,13 +1,20 @@
 export const en = {
   language: "English",
   home: {
-    title: "Home",
-    description: "Welcome to the home page",
+    welcome: "Welcome to the home page",
   },
+
+  navigation: {
+    home: "Home",
+    about: "About",
+    contact: "Contact",
+    login: "Login",
+    logout: "Logout",
+  },
+
   login: {
     header: "Login to your account",
     doNothave: `Don't you have an account?`,
-    loginButton: "Login",
     submittingButton: "Logging in",
     description: "Enter your email and password to login to your account",
   },
@@ -19,6 +26,8 @@ export const en = {
     description: "Enter your email and password to create your account",
   },
   common: {
+    title: "Collors & shapes",
+    description: "Social support network for people with art in their blood",
     name: "Name",
     email: "Email",
     password: "Password",

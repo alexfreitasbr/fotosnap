@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "../button";
 
 type GotoProps = {
   href: string;
@@ -9,18 +8,11 @@ type GotoProps = {
 
 export function GoTo({ href, children, className }: GotoProps) {
   return (
-    <Button
-      type="button"
-      variant="link"
-      className={`h-auto p-0 hover:no-underline ${className}`}
-      aria-expanded="false" 
-    >
       <Link
         href={href}
-        className="hover:opacity-70 transition-colors duration-300"
+        className={`hover:opacity-70 transition-colors duration-300 ${className}`}
       >
         {children}
       </Link>
-    </Button>
   );
 }

@@ -13,12 +13,12 @@ export function NavBar() {
     <nav className="flex w-full pr-14 gap-4" aria-label="Menu Principal" test-id="navbar">
       <ul className="flex w-full items-center gap-4">
         {NAVIGATION_ITEMS.map((item) => (
-          <GoTo key={item.id} href={item.href} aria-label={language.navigation[item.id]} test-id={item.id}>
+          <GoTo key={item.id} href={item.href} aria-label={language.navigation[item.id]} test-id={item.id} className="text-lg font-semibold">
             {language.navigation[item.id]}
           </GoTo>
         ))}
-        <LoginLogout />
       </ul>
+      <LoginLogout />
     </nav>
   );
 }

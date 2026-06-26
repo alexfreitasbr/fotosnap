@@ -10,6 +10,9 @@ export const it = {
     contact: "Contatti",
     login: "Accedi",
     logout: "Esci",
+    profile: "Profilo",
+    dashboard: "Dashboard",
+    gallery: "Galleria",
   },
 
   login: {

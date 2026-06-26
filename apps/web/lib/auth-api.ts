@@ -1,3 +1,7 @@
+import {
+  AUTH_TOKEN_COOKIE,
+  AUTH_TOKEN_MAX_AGE,
+} from "@/lib/auth-constants";
 import type { SignInValues, SignUpValues } from "@/lib/schema";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
@@ -83,6 +87,23 @@ export function signIn(data: SignInValues): Promise<AuthResponse> {
 const AUTH_CHANGE_EVENT = "auth-change";
 
 /**
+ * Persists the access token in a cookie so server middleware can read it.
+ *
+ * @param token JWT returned by the auth API.
+ */
+function setAuthTokenCookie(token: string): void {
+  const secure =
+    window.location.protocol === "https:" ? "; Secure" : "";
+
+  document.cookie = `${AUTH_TOKEN_COOKIE}=${encodeURIComponent(token)}; path=/; max-age=${AUTH_TOKEN_MAX_AGE}; SameSite=Lax${secure}`;
+}
+
+/** Removes the auth token cookie on logout. */
+function clearAuthTokenCookie(): void {
+  document.cookie = `${AUTH_TOKEN_COOKIE}=; path=/; max-age=0; SameSite=Lax`;
+}
+
+/**
  * Notifies listeners that the auth session changed.
  */
 function notifyAuthChange(): void {
@@ -117,6 +138,7 @@ export function getAuthSession(): AuthUser | null {
 export function saveAuthSession(auth: AuthResponse): void {
   localStorage.setItem("accessToken", auth.accessToken);
   localStorage.setItem("user", JSON.stringify(auth.user));
+  setAuthTokenCookie(auth.accessToken);
   notifyAuthChange();
 }
 
@@ -126,7 +148,19 @@ export function saveAuthSession(auth: AuthResponse): void {
 export function clearAuthSession(): void {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("user");
+  clearAuthTokenCookie();
   notifyAuthChange();
+}
+
+/**
+ * Ensures the auth cookie matches local storage (e.g. after a deploy).
+ */
+export function syncAuthSessionCookie(): void {
+  const token = localStorage.getItem("accessToken");
+
+  if (token) {
+    setAuthTokenCookie(token);
+  }
 }
 
 export { AUTH_CHANGE_EVENT };

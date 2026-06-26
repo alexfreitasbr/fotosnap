@@ -10,18 +10,21 @@ export const pt = {
     contact: "Contato",
     login: "Acessar",
     logout: "Sair",
+    profile: "Perfil",
+    dashboard: "Dashboard",
+    gallery: "Galeria",
   },
 
   login: {
     header: "Entre com sua conta",
-    doNothave: `Você não tem uma conta?`,
+    doNothave: `Você não tem uma conta`,
     submittingButton: "Acessando",
     description: "Entre com seu email e senha para acessar sua conta",
   },
   signup: {
     header: "Criar uma conta",
     areadyHave: "Já tem uma conta?",
-    signupButton: "Criar uma conta",
+    signupButton: "Criar uma conta?",
     submittingButton: "Criando uma conta",
     description: "Entre com seu email e senha para criar sua conta",
   },

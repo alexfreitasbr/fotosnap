@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { createSignInSchema, createSignUpSchema } from "@/lib/schema";
-import { useLanguageStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language.store";
 
 /**
  * Returns a Zod sign-up schema with validation messages in the active locale.

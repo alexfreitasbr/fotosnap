@@ -10,6 +10,9 @@ export const en = {
     contact: "Contact",
     login: "Login",
     logout: "Logout",
+    profile: "Profile",
+    dashboard: "Dashboard",
+    gallery: "Gallery",
   },
 
   login: {

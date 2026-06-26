@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useLanguageStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language.store";
 
 /**
  * Keeps document title and meta description in sync with the active locale.

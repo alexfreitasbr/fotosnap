@@ -4,7 +4,8 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/layout/header";
 import { DocumentMetadata } from "@/components/document-metadata";
-import { getLanguage } from "@/stores/language";
+import { getLanguage } from "@/stores/language.store";
+import { NavigationTracker } from "@/components/layout/navegation-track";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", inter.variable)}>
       <body>
+        <NavigationTracker />
         <DocumentMetadata />
         <Header />
         {children}

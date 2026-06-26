@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   AUTH_CHANGE_EVENT,
   getAuthSession,
+  syncAuthSessionCookie,
   type AuthUser,
 } from "@/lib/auth-api";
 
@@ -27,6 +28,7 @@ export function useAuthSession(): AuthUser | null {
   const [user, setUser] = useState<AuthUser | null>(null);
 
   useEffect(() => {
+    syncAuthSessionCookie();
     setUser(getAuthSession());
     return subscribeToAuthChanges(() => setUser(getAuthSession()));
   }, []);

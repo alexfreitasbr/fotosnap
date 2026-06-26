@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { SignUpValues } from "@/lib/schema";
 import { useState } from "react";
-import { useLanguageStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language.store";
 import { useSignUpSchema } from "@/hooks/use-auth-schemas";
 
 type SignUpFormProps = {

@@ -4,7 +4,7 @@ import SignUpForm from "@/components/auth/signup-form";
 import { GoTo } from "@/components/ui/goto";
 import { saveAuthSession, signUp } from "@/lib/auth-api";
 import { SignUpValues } from "@/lib/schema";
-import { useLanguageStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language.store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -40,7 +40,7 @@ export default function SingUp() {
           <dl className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <dt>{language.signup.areadyHave}</dt>
             <GoTo href="/login">
-              <dd>{language.login.loginButton}</dd>
+              <dd>{language.signup.areadyHave}</dd>
             </GoTo>
           </dl>
         </aside>

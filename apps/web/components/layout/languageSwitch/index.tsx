@@ -1,5 +1,5 @@
 "use client";
-import { type Locale, useLanguageStore } from "@/stores/language";
+import { type Locale, useLanguageStore } from "@/stores/language.store";
 import { BR, US, DE, ES, FR, IT } from 'country-flag-icons/react/3x2';
 
 const LOCALES = ["pt", "en", "de", "es", "fr", "it"] as const satisfies readonly Locale[];

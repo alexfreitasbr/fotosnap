@@ -4,7 +4,7 @@ import { GoTo } from "@/components/ui/goto";
 import SignInForm from "@/components/auth/signin-form";
 import { saveAuthSession, signIn } from "@/lib/auth-api";
 import { SignInValues } from "@/lib/schema";
-import { useLanguageStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language.store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 

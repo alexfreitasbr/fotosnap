@@ -10,6 +10,9 @@ export const fr = {
     contact: "Contact",
     login: "Se connecter",
     logout: "Se déconnecter",
+    profile: "Profil",
+    dashboard: "Dashboard",
+    gallery: "Galerie",
   },
 
   login: {

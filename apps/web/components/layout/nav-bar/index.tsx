@@ -10,12 +10,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useAuthSession } from "@/hooks/use-auth-session";
+import { useNavigationStore } from "@/stores/navegation.store";
 
 export function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language } = useLanguageStore();
   const pathname = usePathname();
   const user = useAuthSession();
+  const currentRoute = useNavigationStore((state) => state.currentRoute);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -47,7 +49,7 @@ export function NavBar() {
     return(
     <GoTo
       key={item.id}
-      className={`flex items-center justify-center rounded-md  bg-transparent ${isMenuOpen || windowWidth <= 640 ? "aspect-square bg-white" : "bg-transparent"}`}
+      className={`flex items-center justify-center rounded-md  bg-transparent ${isMenuOpen || windowWidth <= 640 ? "aspect-square bg-white" : "bg-transparent"} ${currentRoute?.pathname === item.href ? "text-blue-500" : ""}`}
       href={item.href}
       aria-label={language.navigation[item.id]}
       test-id={item.id}
